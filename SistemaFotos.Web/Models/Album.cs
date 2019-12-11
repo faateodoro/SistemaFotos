@@ -8,13 +8,13 @@ namespace SistemaFotos.Web.Models
 {
     public class Album
     {
-        public Album(string titulo, DateTime data, string descricao, string caminho)
-        {
-            Titulo = titulo;
-            Data = data;
-            Descricao = descricao;
-            Caminho = caminho;
-        }
+        // public Album(string titulo, DateTime data, string descricao, string caminho)
+        // {
+        //     Titulo = titulo;
+        //     Data = data;
+        //     Descricao = descricao;
+        //     Caminho = caminho;
+        // }
 
         public Album()
         {
