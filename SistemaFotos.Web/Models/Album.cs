@@ -16,6 +16,10 @@ namespace SistemaFotos.Web.Models
             Caminho = caminho;
         }
 
+        public Album()
+        {
+        }
+
         [Required]
         public int Id { get; private set; }
         [Required]
