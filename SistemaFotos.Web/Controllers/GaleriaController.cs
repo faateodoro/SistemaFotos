@@ -10,6 +10,11 @@ namespace SistemaFotos.Web.Controllers
             return View();
         }
 
+        public IActionResult Novo()
+        {
+            return View();
+        }
+
         public IActionResult Novo(Album album)
         {
             if(album.Equals(null))

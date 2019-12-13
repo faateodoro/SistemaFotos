@@ -15,6 +15,11 @@ namespace SistemaFotos.Web.Controllers
             return View();
         }
 
+        public IActionResult Novo()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
