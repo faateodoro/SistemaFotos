@@ -1,19 +1,19 @@
 @model SistemaFotos.Web.Models.Album
 
 <div class="container">
-    <form asp-controller="Home" asp-action="Registrar" method="post">
-    <div class="form-group">
-        @Html.DisplayNameFor(model => model.Titulo)
-        @Html.DisplayFor(model => model.Titulo)
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <form asp-controller="Home" asp-action="SubirImagem" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="Titulo">Título</label>
+            <input asp-for="Titulo" type="text" id="titulo" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Descricao">Descrição</label>
+            <input asp-for="Descricao" type="text" id="descricao" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="uploadimagem">Carregar Imagem</label>
+            <input type="file" id="uploadImagem" class="form-control-file" />
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
 </div>

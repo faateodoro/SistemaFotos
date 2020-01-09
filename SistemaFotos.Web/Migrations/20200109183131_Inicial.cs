@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SistemaFotos.Web.Migrations
 {
@@ -8,26 +7,24 @@ namespace SistemaFotos.Web.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Albuns",
+                name: "Imagens",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Titulo = table.Column<string>(nullable: false),
-                    Data = table.Column<DateTime>(nullable: false),
-                    Descricao = table.Column<string>(nullable: false),
-                    Caminho = table.Column<string>(nullable: false)
+                    Titulo = table.Column<string>(nullable: true),
+                    CaminhoImagem = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Albuns", x => x.Id);
+                    table.PrimaryKey("PK_Imagens", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Albuns");
+                name: "Imagens");
         }
     }
 }

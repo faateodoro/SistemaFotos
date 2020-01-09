@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<SistemaFotos.Web.Models.Imagem>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,24 +7,15 @@
     <h1 class="display-4">Welcome</h1>
     <div class="container">
         <div class="row">
-            <div class="col-sm">
-                <img class="rouded" src="~/img/oo-csharp.png">
-                <p>Parágrafo sobre a imagem</p>
-                <br />
-                <br />
-            </div>
-            <div class="col-sm">
-                <img class="rouded" src="~/img/oo-csharp.png">
-                <p>Parágrafo sobre a imagem</p>
-                <br />
-                <br />
-            </div>
-            <div class="col-sm">
-                <img class="rouded" src="~/img/oo-csharp.png">
-                <p>Parágrafo sobre a imagem</p>
-                <br />
-                <br />
-            </div>
+            @foreach (var img in Model)
+            {
+                <div class="col-sm">
+                    <img class="rouded" src="@(img.CaminhoImagem)">
+                    <p>@img.Titulo</p>
+                    <br />
+                    <br />
+                </div>
+            }
         </div>
     </div>
 </div>
