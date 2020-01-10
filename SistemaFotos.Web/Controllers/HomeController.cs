@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -34,7 +35,7 @@ namespace SistemaFotos.Web.Controllers
             // Contexto.Imagens.Add(i3);
             // Contexto.SaveChanges();
 
-            return View(dbSet.ToList() );
+            return View(dbSet.ToList());
         }
 
         public IActionResult Novo()
@@ -42,9 +43,32 @@ namespace SistemaFotos.Web.Controllers
             return View();
         }
 
-        public IActionResult SubirImagem()
+        [HttpPost]
+        public IActionResult SubirImagem([FromForm]UploadImagem uploadImagem)
         {
-            return View();
+            if(ModelState.IsValid)
+            {
+                var imagem = new Imagem();
+
+                imagem.Titulo = uploadImagem.Titulo;
+
+                var hoje = DateTime.Today;
+                string caminho = "wwwroot/img/" + hoje.ToString("yyyymmdd") + ".png";
+
+                using (MemoryStream ms = new MemoryStream())
+                using (var arquivo = new FileStream(caminho, FileMode.Create))
+                {
+                    byte[] bytes = ms.ToArray();
+
+                    arquivo.Write(bytes, 0, bytes.Length);
+                }
+            }
+            // if (imagem != null)
+            // {
+            //     Contexto.Imagens.Add(imagem);
+            //     Contexto.SaveChanges();
+            // }
+            return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()
