@@ -53,7 +53,7 @@ namespace SistemaFotos.Web.Controllers
             if (ModelState.IsValid)
             {
                 var agora = DateTime.Now;
-                string caminho = $"img/uploads/{agora.ToString("yyyyMMddHHmm")}.png";
+                string caminho = $"img/uploads/{agora.ToString("yyyyMMddHHmmss")}.png";
 
                 using(var fs = new FileStream(Path.Combine("wwwroot/",caminho), FileMode.Create, FileAccess.Write))
                 {
