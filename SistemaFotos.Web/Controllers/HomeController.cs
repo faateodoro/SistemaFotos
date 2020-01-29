@@ -50,13 +50,17 @@ namespace SistemaFotos.Web.Controllers
         [HttpPost]
         public IActionResult SubirImagem(ImagemUpload imagemUpload)
         {
-             
-            var agora = DateTime.Now;
-            string caminho = Path.Combine(_env.ContentRootPath, $"wwwroot/img/uploads/{agora.ToString("yyyyMMddHHmm")}.png");
-
-            using(var fs = new FileStream(caminho, FileMode.Create, FileAccess.Write))
+            if (ModelState.IsValid)
             {
-                imagemUpload.Arquivo.CopyTo(fs);
+                var agora = DateTime.Now;
+                string caminho = $"img/uploads/{agora.ToString("yyyyMMddHHmm")}.png";
+
+                using(var fs = new FileStream(Path.Combine("wwwroot/",caminho), FileMode.Create, FileAccess.Write))
+                {
+                    imagemUpload.Arquivo.CopyTo(fs);
+                }
+                Contexto.Imagens.Add(new Imagem(imagemUpload.Titulo, caminho));
+                Contexto.SaveChanges();
             }
 
             return RedirectToAction("Index");
