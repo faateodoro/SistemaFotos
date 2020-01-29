@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <Folder Include="Dados\" />
+    <Folder Include="wwwroot\img\uploads\" />
   </ItemGroup>
 
 </Project>

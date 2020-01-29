@@ -13,7 +13,7 @@ namespace SistemaFotos.Web.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Titulo = table.Column<string>(nullable: true),
-                    CaminhoImagem = table.Column<string>(nullable: true)
+                    Caminho = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

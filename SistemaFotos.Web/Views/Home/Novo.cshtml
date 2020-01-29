@@ -1,4 +1,4 @@
-@model SistemaFotos.Web.Models.Album
+@model SistemaFotos.Web.Models.ImagemUpload
 
 <div class="container">
     <form asp-controller="Home" asp-action="SubirImagem" method="post" enctype="multipart/form-data">
@@ -6,13 +6,14 @@
             <label asp-for="Titulo">Título</label>
             <input asp-for="Titulo" type="text" id="titulo" class="form-control" />
         </div>
-        @* <div class="form-group">
+         @*<div class="form-group">
             <label asp-for="Descricao">Descrição</label>
             <input asp-for="Descricao" type="text" id="descricao" class="form-control" />
-        </div> *@
+        </div>*@ 
         <div class="form-group">
-            <label for="dadosimagem">Carregar Imagem</label>
-            <input type="file" id="dadosImagem" class="form-control-file" />
+            <label asp-for="Arquivo">Carregar Imagem</label>
+            <input asp-for="Arquivo" type="file" class="form-control-file"
+                   accept="image/png, image/jpg"/>
         </div>
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>

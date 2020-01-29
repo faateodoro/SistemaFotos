@@ -1,47 +1,41 @@
 using System.IO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SistemaFotos.Web.Models
 {
     public class Imagem
     {
-
         public Imagem()
         {
-            
         }
 
-        public Imagem(string titulo, string caminhoImagem)
+        public Imagem(string titulo, string caminho)
         {
             Titulo = titulo;
-            CaminhoImagem = caminhoImagem;
+            Caminho = caminho;
         }
 
-        public int Id { get; private set; }
-
+        public int Id { get; set; }
         public string Titulo { get; set; }
-
-        public string CaminhoImagem { get; set; }
+        public string Caminho { get; set; }
     }
 
-    public class UploadImagem
+    public class ImagemUpload
     {
-        public UploadImagem(string titulo, byte[] dadosImagem)
+
+        public ImagemUpload()
+        {
+        }
+
+        public ImagemUpload(string titulo, IFormFile arquivo)
         {
             Titulo = titulo;
-            DadosImagem = dadosImagem;
+            Arquivo = arquivo;
         }
 
-        public UploadImagem()
-        {
-        }
-
-        public int Id { get; private set; }
-
-        [FromForm(Name="titulo")]
         public string Titulo { get; set; }
 
-        [FromForm(Name="dadosImagem")]
-        public byte[] DadosImagem { get; set; }
+        public IFormFile Arquivo { get; set; }
     }
 }

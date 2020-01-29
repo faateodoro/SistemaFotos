@@ -20,7 +20,7 @@ namespace SistemaFotos.Web.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CaminhoImagem");
+                    b.Property<string>("Caminho");
 
                     b.Property<string>("Titulo");
 

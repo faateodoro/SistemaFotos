@@ -8,7 +8,7 @@ using SistemaFotos.Web.Dados;
 namespace SistemaFotos.Web.Migrations
 {
     [DbContext(typeof(FotosContext))]
-    [Migration("20200109183131_Inicial")]
+    [Migration("20200129183901_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,7 +22,7 @@ namespace SistemaFotos.Web.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CaminhoImagem");
+                    b.Property<string>("Caminho");
 
                     b.Property<string>("Titulo");
 

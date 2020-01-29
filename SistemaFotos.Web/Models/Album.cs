@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,13 +9,13 @@ namespace SistemaFotos.Web.Models
 {
     public class Album
     {
-        // public Album(string titulo, DateTime data, string descricao, string caminho)
-        // {
-        //     Titulo = titulo;
-        //     Data = data;
-        //     Descricao = descricao;
-        //     Caminho = caminho;
-        // }
+        public Album(string titulo, string descricao, IFormFile arquivo)
+        {
+            Titulo = titulo;
+            Data = DateTime.Today;
+            Descricao = descricao;
+            Arquivo = arquivo;
+        }
 
         public Album()
         {
@@ -29,6 +30,6 @@ namespace SistemaFotos.Web.Models
         [Required]
         public string Descricao { get; private set; }
         [Required]
-        public string Caminho { get; private set; }
+        public IFormFile Arquivo { get; private set; }
     }
 }
