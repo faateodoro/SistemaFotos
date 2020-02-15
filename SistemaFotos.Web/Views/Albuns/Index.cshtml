@@ -1,0 +1,22 @@
+﻿@model List<SistemaFotos.Web.Models.Imagem>
+@{
+    ViewData["Title"] = "Home Page - Albuns";
+}
+
+@*Alterar essa página!*@
+<div class="text-center">
+    <h1 class="display-4">Por enquanto vai ficar assim!</h1>
+    <div class="container">
+        <div class="row">
+            @foreach (var img in Model)
+            {
+                <div class="col-sm">
+                    <img class="rounded" src="@(img.Caminho)">
+                    <p>@img.Titulo</p>
+                    <br />
+                    <br />
+                </div>
+            }
+        </div>
+    </div>
+</div>

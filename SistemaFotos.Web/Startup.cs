@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SistemaFotos.Web.Dados;
+using SistemaFotos.Web.Repositories;
 
 namespace SistemaFotos.Web
 {
@@ -36,6 +37,8 @@ namespace SistemaFotos.Web
 
             services.AddDbContext<FotosContext>(options => options.UseSqlite(connectionString));
 
+            services.AddTransient<IAlbumRepository, AlbumRepository>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -58,7 +61,7 @@ namespace SistemaFotos.Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Albuns}/{action=Index}/{id?}");
             });
         }
     }

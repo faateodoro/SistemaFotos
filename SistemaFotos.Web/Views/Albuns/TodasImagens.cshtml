@@ -1,0 +1,25 @@
+﻿@model List<SistemaFotos.Web.Models.Imagem>
+@{
+    ViewData["Title"] = "Todas Imagens";
+}
+
+<div class="text-center">
+    <h1>Todas Imagens</h1>
+    <br />
+    <div class="container">
+
+        <div class="row">
+            @foreach (var img in Model)
+            {
+                <div class="col-sm">
+                    <a asp-action="ExibirDetalhes" asp-controller="Albuns" asp-route-id="@img.Id">
+                        <img class="rounded" src="~/@(img.Caminho)">
+                        <p>@img.Titulo</p>
+                    </a>
+                    <br />
+                    <br />
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -18,14 +18,7 @@ namespace SistemaFotos.Web.Controllers
     {
         private FotosContext Contexto;
         private DbSet<Imagem> dbSet;
-        private IHostingEnvironment _env;
-
-        public HomeController(FotosContext contexto, IHostingEnvironment env)
-        {
-            Contexto = contexto;
-            dbSet = contexto.Set<Imagem>();
-            _env = env;
-        }
+        
         public IActionResult Index()
         {
             //IList<Imagem> imagens = new List<Imagem>();
@@ -45,25 +38,6 @@ namespace SistemaFotos.Web.Controllers
         public IActionResult Novo()
         {
             return View();
-        }
-
-        [HttpPost]
-        public IActionResult SubirImagem(ImagemUpload imagemUpload)
-        {
-            if (ModelState.IsValid)
-            {
-                var agora = DateTime.Now;
-                string caminho = $"img/uploads/{agora.ToString("yyyyMMddHHmmss")}.png";
-
-                using(var fs = new FileStream(Path.Combine("wwwroot/",caminho), FileMode.Create, FileAccess.Write))
-                {
-                    imagemUpload.Arquivo.CopyTo(fs);
-                }
-                Contexto.Imagens.Add(new Imagem(imagemUpload.Titulo, caminho));
-                Contexto.SaveChanges();
-            }
-
-            return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()
