@@ -17,7 +17,7 @@ namespace SistemaFotos.Web.Controllers
         private FotosContext Contexto;
         private DbSet<Imagem> dbSet;
         private IHostingEnvironment _env;
-        private readonly IAlbumRepository _albumRepository;
+        private IAlbumRepository _albumRepository;
 
         public AlbunsController(FotosContext contexto, IHostingEnvironment env,
             IAlbumRepository albumRepository)
@@ -64,11 +64,27 @@ namespace SistemaFotos.Web.Controllers
             return View(imagens);
         }
 
-        [Route ("albuns/exibirdetalhes/{id:int}")]
-        public IActionResult ExibirDetalhes(int id)
+        [Route("albuns/detalhes/{id:int}")]
+        public async Task<IActionResult> DetalhesImagem(int id)
         {
-            var imagem =_albumRepository.GetId(id);
+            var imagem = await _albumRepository.GetIdAsync(id);
             return View(imagem);
+        }
+
+        
+        [Route("albuns/alterar/{id:int}")]
+        public async Task<IActionResult> AlterarDetalhesImagem(int id)
+        {
+            var imagem = await _albumRepository.GetIdAsync(id);
+            return View(imagem);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AlterarDetalhes(Imagem imagem)
+        {
+            await _albumRepository.Alterar(imagem);
+
+            return RedirectToAction("TodasImagens");
         }
     }
 }

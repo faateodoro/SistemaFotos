@@ -12,9 +12,14 @@
             @foreach (var img in Model)
             {
                 <div class="col-sm">
-                    <a asp-action="ExibirDetalhes" asp-controller="Albuns" asp-route-id="@img.Id">
-                        <img class="rounded" src="~/@(img.Caminho)">
-                        <p>@img.Titulo</p>
+                    <img class="border border-dark rounded" src="~/@(img.Caminho)">
+                    <p>@img.Titulo</p>
+                    <a asp-action="DetalhesImagem" asp-controller="Albuns" asp-route-id="@img.Id" class="text-dark">
+                        Detalhes
+                    </a>
+                     | 
+                    <a asp-action="AlterarDetalhesImagem" asp-controller="Albuns" asp-route-id="@img.Id" class="text-dark">
+                        Alterar
                     </a>
                     <br />
                     <br />

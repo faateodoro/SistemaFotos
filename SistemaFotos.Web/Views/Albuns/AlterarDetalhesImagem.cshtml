@@ -1,0 +1,24 @@
+﻿@model Imagem
+@{
+    ViewData["Title"] = "Alterar";
+}
+
+<h1>Alterar</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="figure-img">
+                <img src="~/@(Model.Caminho)" class="border border-dark rounded" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <form asp-action="AlterarDetalhes" asp-controller="Albuns" method="post" >
+                <input asp-for="Caminho" type="hidden" />
+                <input asp-for="Id" type="hidden" />
+                <input asp-for="Titulo" type="text" value="@(Model.Titulo)" />
+                <button type="submit" class="btn btn-primary">Alterar</button>
+            </form>
+        </div>
+    </div>
+</div>

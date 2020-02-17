@@ -5,13 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace SistemaFotos.Web.Repositories
 {
     public class AlbumRepository : IAlbumRepository
     {
-        private readonly FotosContext _contexto;
-        private readonly DbSet<Imagem> _dbSet;
+        private FotosContext _contexto;
+        private DbSet<Imagem> _dbSet;
 
         public AlbumRepository(FotosContext contexto)
         {
@@ -19,7 +20,15 @@ namespace SistemaFotos.Web.Repositories
             _dbSet = _contexto.Set<Imagem>();
         }
 
-        public Imagem GetId(int id) => _dbSet.FirstOrDefault(i => i.Id == id);
+        public async Task Alterar(Imagem imagem)
+        {
+            var imagemDB = _dbSet.Where(i => i.Id == imagem.Id).SingleOrDefault();
+            imagemDB.Titulo = imagem.Titulo;
+            _contexto.Update(imagemDB);
+            await _contexto.SaveChangesAsync();
+        }
+
+        public async Task<Imagem> GetIdAsync(int id) => await _dbSet.FirstOrDefaultAsync(i => i.Id == id);
 
     }
 }
