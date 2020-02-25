@@ -86,5 +86,12 @@ namespace SistemaFotos.Web.Controllers
 
             return RedirectToAction("TodasImagens");
         }
+
+        public async Task<IActionResult> DeletarImagem(int id)
+        {
+            await _albumRepository.Deletar(id);
+
+            return RedirectToAction("TodasImagens");
+        }
     }
 }

@@ -28,6 +28,13 @@ namespace SistemaFotos.Web.Repositories
             await _contexto.SaveChangesAsync();
         }
 
+        public async Task Deletar(int id)
+        {
+            var imagem = await _dbSet.FirstOrDefaultAsync(i => i.Id == id);
+            _contexto.Remove(imagem);
+            await _contexto.SaveChangesAsync();
+        }
+
         public async Task<Imagem> GetIdAsync(int id) => await _dbSet.FirstOrDefaultAsync(i => i.Id == id);
 
     }
