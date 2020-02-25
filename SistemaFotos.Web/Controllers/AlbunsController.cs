@@ -89,7 +89,8 @@ namespace SistemaFotos.Web.Controllers
 
         public async Task<IActionResult> DeletarImagem(int id)
         {
-            await _albumRepository.Deletar(id);
+            var imagem = await _albumRepository.GetIdAsync(id);
+            await _albumRepository.Deletar(imagem);
 
             return RedirectToAction("TodasImagens");
         }
