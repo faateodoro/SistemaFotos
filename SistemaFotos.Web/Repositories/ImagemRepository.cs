@@ -9,12 +9,12 @@ using System.Web.Mvc;
 
 namespace SistemaFotos.Web.Repositories
 {
-    public class AlbumRepository : IAlbumRepository
+    public class ImagemRepository : IImagemRepository
     {
         private FotosContext _contexto;
         private DbSet<Imagem> _dbSet;
 
-        public AlbumRepository(FotosContext contexto)
+        public ImagemRepository(FotosContext contexto)
         {
             _contexto = contexto;
             _dbSet = _contexto.Set<Imagem>();

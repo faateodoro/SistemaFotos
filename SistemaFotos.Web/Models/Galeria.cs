@@ -7,24 +7,24 @@ using System.Threading.Tasks;
 
 namespace SistemaFotos.Web.Models
 {
-    public class Album
+    public class Galeria
     {
-        public Album(string tituloDoAlbum, string descricao, IList<Imagem> arquivo)
+        public Galeria(string tituloDaGaleria, string descricao, IList<Imagem> arquivo)
         {
-            TituloDoAlbum = tituloDoAlbum;
+            TituloDaGaleria = tituloDaGaleria;
             Data = DateTime.Today;
             Descricao = descricao;
             Arquivo = arquivo;
         }
 
-        public Album()
+        public Galeria()
         {
         }
 
         [Required]
         public int Id { get; private set; }
         [Required]
-        public string TituloDoAlbum { get; private set; }
+        public string TituloDaGaleria { get; private set; }
         [Required]
         public DateTime Data { get; private set; }
         [Required]

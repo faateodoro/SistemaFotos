@@ -37,7 +37,7 @@ namespace SistemaFotos.Web
 
             services.AddDbContext<FotosContext>(options => options.UseSqlite(connectionString));
 
-            services.AddTransient<IAlbumRepository, AlbumRepository>();
+            services.AddTransient<IImagemRepository, ImagemRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace SistemaFotos.Web.Repositories
 {
-    public interface IAlbumRepository
+    public interface IImagemRepository
     {
         Task<Imagem> GetIdAsync(int id);
         Task Alterar(Imagem imagem);

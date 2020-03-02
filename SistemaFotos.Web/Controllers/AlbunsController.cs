@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using SistemaFotos.Web.Dados;
 using SistemaFotos.Web.Models;
 using SistemaFotos.Web.Repositories;
+using FileIO = System.IO.File;
 
 namespace SistemaFotos.Web.Controllers
 {
@@ -17,15 +18,15 @@ namespace SistemaFotos.Web.Controllers
         private FotosContext Contexto;
         private DbSet<Imagem> dbSet;
         private IHostingEnvironment _env;
-        private IAlbumRepository _albumRepository;
+        private IImagemRepository _imagemRepository;
 
         public AlbunsController(FotosContext contexto, IHostingEnvironment env,
-            IAlbumRepository albumRepository)
+            IImagemRepository imagemRepository)
         {
             Contexto = contexto;
             dbSet = contexto.Set<Imagem>();
             _env = env;
-            _albumRepository = albumRepository;
+            _imagemRepository = imagemRepository;
         }
 
         public IActionResult Novo()
@@ -67,7 +68,7 @@ namespace SistemaFotos.Web.Controllers
         [Route("albuns/detalhes/{id:int}")]
         public async Task<IActionResult> DetalhesImagem(int id)
         {
-            var imagem = await _albumRepository.GetIdAsync(id);
+            var imagem = await _imagemRepository.GetIdAsync(id);
             return View(imagem);
         }
 
@@ -75,24 +76,38 @@ namespace SistemaFotos.Web.Controllers
         [Route("albuns/alterar/{id:int}")]
         public async Task<IActionResult> AlterarDetalhesImagem(int id)
         {
-            var imagem = await _albumRepository.GetIdAsync(id);
+            var imagem = await _imagemRepository.GetIdAsync(id);
             return View(imagem);
         }
 
         [HttpPost]
         public async Task<IActionResult> AlterarDetalhes(Imagem imagem)
         {
-            await _albumRepository.Alterar(imagem);
+            await _imagemRepository.Alterar(imagem);
 
             return RedirectToAction("TodasImagens");
         }
 
         public async Task<IActionResult> DeletarImagem(int id)
         {
-            var imagem = await _albumRepository.GetIdAsync(id);
-            await _albumRepository.Deletar(imagem);
+            if (ModelState.IsValid)
+            {
+                var imagem = await _imagemRepository.GetIdAsync(id);
+                var caminho = imagem.Caminho;
+
+                
+                FileIO.Delete("wwwroot/" + caminho);
+                await _imagemRepository.Deletar(imagem);
+            }
 
             return RedirectToAction("TodasImagens");
+        }
+
+        public IActionResult MinhasGalerias()
+        {
+
+
+            return View();
         }
     }
 }
