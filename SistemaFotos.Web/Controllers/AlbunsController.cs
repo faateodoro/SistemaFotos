@@ -83,11 +83,7 @@ namespace SistemaFotos.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var imagem = await _imagemRepository.GetIdAsync(id);
-                var caminho = imagem.Caminho;
-                
-                FileIO.Delete("wwwroot/" + caminho);
-                await _imagemRepository.DeletarImagemAsync(imagem);
+                await _imagemRepository.DeletarImagemAsync(id);
             }
 
             return RedirectToAction("TodasImagens");

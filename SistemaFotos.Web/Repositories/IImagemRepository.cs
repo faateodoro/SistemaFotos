@@ -7,7 +7,7 @@ namespace SistemaFotos.Web.Repositories
     {
         Task<Imagem> GetIdAsync(int id);
         Task AlterarImagemAsync(Imagem imagem);
-        Task DeletarImagemAsync(Imagem imagem);
+        Task DeletarImagemAsync(int id);
         Task SalvarImagemAsync(ImagemUpload imagemUpload);
     }
 }

@@ -42,8 +42,12 @@ namespace SistemaFotos.Web.Repositories
             await _contexto.SaveChangesAsync();
         }
 
-        public async Task DeletarImagemAsync(Imagem imagem)
+        public async Task DeletarImagemAsync(int id)
         {
+            var imagem = await GetIdAsync(id);
+            var caminho = imagem.Caminho;
+
+            File.Delete("wwwroot/" + caminho);
             _contexto.Remove(imagem);
             await _contexto.SaveChangesAsync();
         }
