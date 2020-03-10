@@ -6,7 +6,8 @@ namespace SistemaFotos.Web.Repositories
     public interface IImagemRepository
     {
         Task<Imagem> GetIdAsync(int id);
-        Task Alterar(Imagem imagem);
-        Task Deletar(Imagem imagem);
+        Task AlterarImagemAsync(Imagem imagem);
+        Task DeletarImagemAsync(Imagem imagem);
+        Task SalvarImagemAsync(ImagemUpload imagemUpload);
     }
 }

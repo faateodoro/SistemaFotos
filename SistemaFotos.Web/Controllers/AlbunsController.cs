@@ -40,28 +40,20 @@ namespace SistemaFotos.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult SubirImagem(ImagemUpload imagemUpload)
+        public async Task<IActionResult> SubirImagem(ImagemUpload imagemUpload)
         {
             if (ModelState.IsValid)
             {
-                var agora = DateTime.Now;
-                string caminho = $"img/uploads/{agora.ToString("yyyyMMddHHmmss") + imagemUpload.Arquivo.FileName}";
-
-                using (var fs = new FileStream(Path.Combine("wwwroot/", caminho), FileMode.Create, FileAccess.Write))
-                {
-                    imagemUpload.Arquivo.CopyTo(fs);
-                }
-                Contexto.Imagens.Add(new Imagem(imagemUpload.Titulo, caminho));
-                Contexto.SaveChanges();
+                await _imagemRepository.SalvarImagemAsync(imagemUpload);
             }
-
             return RedirectToAction("Index");
         }
 
-        public IActionResult TodasImagens()
-        {
-            var imagens = dbSet.ToList();
+        
 
+        public async Task<IActionResult> TodasImagens()
+        {
+            var imagens = await dbSet.ToListAsync();
             return View(imagens);
         }
 
@@ -83,8 +75,7 @@ namespace SistemaFotos.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> AlterarDetalhes(Imagem imagem)
         {
-            await _imagemRepository.Alterar(imagem);
-
+            await _imagemRepository.AlterarImagemAsync(imagem);
             return RedirectToAction("TodasImagens");
         }
 
@@ -94,10 +85,9 @@ namespace SistemaFotos.Web.Controllers
             {
                 var imagem = await _imagemRepository.GetIdAsync(id);
                 var caminho = imagem.Caminho;
-
                 
                 FileIO.Delete("wwwroot/" + caminho);
-                await _imagemRepository.Deletar(imagem);
+                await _imagemRepository.DeletarImagemAsync(imagem);
             }
 
             return RedirectToAction("TodasImagens");
@@ -105,8 +95,6 @@ namespace SistemaFotos.Web.Controllers
 
         public IActionResult MinhasGalerias()
         {
-
-
             return View();
         }
     }
