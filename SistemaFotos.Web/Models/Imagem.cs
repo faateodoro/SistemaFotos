@@ -1,5 +1,6 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SistemaFotos.Web.Models
@@ -16,26 +17,18 @@ namespace SistemaFotos.Web.Models
             Caminho = caminho;
         }
 
+        public Imagem(string titulo, string caminho, Galeria galeria) : this(titulo, caminho)
+        {
+            Galeria = galeria;
+        }
+
+        [Required]
         public int Id { get; set; }
+        [Required]
         public string Titulo { get; set; }
+        [Required]
         public string Caminho { get; set; }
-    }
-
-    public class ImagemUpload
-    {
-
-        public ImagemUpload()
-        {
-        }
-
-        public ImagemUpload(string titulo, IFormFile arquivo)
-        {
-            Titulo = titulo;
-            Arquivo = arquivo;
-        }
-
-        public string Titulo { get; set; }
-
-        public IFormFile Arquivo { get; set; }
+        //[Required]
+        public Galeria Galeria { get; private set; }
     }
 }

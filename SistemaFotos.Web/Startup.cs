@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using SistemaFotos.Web.Dados;
 using SistemaFotos.Web.Repositories;
 
@@ -33,17 +34,20 @@ namespace SistemaFotos.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            var connectionString = Configuration.GetConnectionString("DefaultSqlite");
+            //var connectionString = Configuration.GetConnectionString("DefaultSqlite");
+            var connectionString = Configuration.GetConnectionString("DefaultLocalDB");
 
-            services.AddDbContext<FotosContext>(options => options.UseSqlite(connectionString));
+            //services.AddDbContext<FotosContext>(options => options.UseSqlite(connectionString));
+            services.AddDbContext<FotosContext>(options => options.UseSqlServer(connectionString));
 
             services.AddTransient<IImagemRepository, ImagemRepository>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddRazorPages();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -54,14 +58,16 @@ namespace SistemaFotos.Web
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseRouting();
+
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Albuns}/{action=Index}/{id?}");
+                    pattern: "{controller=Albuns}/{action=Index}/{id?}");
             });
         }
     }

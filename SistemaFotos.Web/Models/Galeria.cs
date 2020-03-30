@@ -9,12 +9,11 @@ namespace SistemaFotos.Web.Models
 {
     public class Galeria
     {
-        public Galeria(string tituloDaGaleria, string descricao, IList<Imagem> arquivo)
+        public Galeria(string tituloDaGaleria, string descricao)
         {
             TituloDaGaleria = tituloDaGaleria;
             Data = DateTime.Today;
             Descricao = descricao;
-            Arquivo = arquivo;
         }
 
         public Galeria()
@@ -29,7 +28,5 @@ namespace SistemaFotos.Web.Models
         public DateTime Data { get; private set; }
         [Required]
         public string Descricao { get; private set; }
-        [Required]
-        public IList<Imagem> Arquivo { get; private set; }
     }
 }

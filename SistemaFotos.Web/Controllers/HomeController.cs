@@ -18,21 +18,26 @@ namespace SistemaFotos.Web.Controllers
     {
         private FotosContext Contexto;
         private DbSet<Imagem> dbSet;
-        
+
+        public HomeController(FotosContext contexto)
+        {
+            Contexto = contexto;
+            dbSet = Contexto.Set<Imagem>();
+        }
+
         public IActionResult Index()
         {
-            //IList<Imagem> imagens = new List<Imagem>();
-            //var i1 = new Imagem("Orientação a Objetos", "img/oo-csharp.png");
-            //var i2 = new Imagem("Bootstrap 4", "img/bootstrap4.png");
-            //var i3 = new Imagem("Xamarin", "img/xamarin.png");
+            ///IList<Imagem> imagens = new List<Imagem>();
+            var i1 = new Imagem("Orientação a Objetos", "img/oo-csharp.png");
+            var i2 = new Imagem("Bootstrap 4", "img/bootstrap4.png");
+            var i3 = new Imagem("Xamarin", "img/xamarin.png");
 
-            //Contexto.Imagens.Add(i1);
-            //Contexto.Imagens.Add(i2);
-            //Contexto.Imagens.Add(i3);
-            //Contexto.SaveChanges();
+            Contexto.Imagens.Add(i1);
+            Contexto.Imagens.Add(i2);
+            Contexto.Imagens.Add(i3);
+            Contexto.SaveChanges();
 
             return View(dbSet.ToList());
-            //return View();
         }
 
         public IActionResult Novo()

@@ -17,15 +17,13 @@ namespace SistemaFotos.Web.Controllers
     {
         private FotosContext Contexto;
         private DbSet<Imagem> dbSet;
-        private IHostingEnvironment _env;
         private IImagemRepository _imagemRepository;
 
-        public AlbunsController(FotosContext contexto, IHostingEnvironment env,
+        public AlbunsController(FotosContext contexto,
             IImagemRepository imagemRepository)
         {
             Contexto = contexto;
             dbSet = contexto.Set<Imagem>();
-            _env = env;
             _imagemRepository = imagemRepository;
         }
 
@@ -34,9 +32,9 @@ namespace SistemaFotos.Web.Controllers
             return View();
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(dbSet.ToList());
+            return View(await dbSet.ToListAsync());
         }
 
         [HttpPost]
@@ -48,8 +46,6 @@ namespace SistemaFotos.Web.Controllers
             }
             return RedirectToAction("Index");
         }
-
-        
 
         public async Task<IActionResult> TodasImagens()
         {
@@ -85,7 +81,6 @@ namespace SistemaFotos.Web.Controllers
             {
                 await _imagemRepository.DeletarImagemAsync(id);
             }
-
             return RedirectToAction("TodasImagens");
         }
 
